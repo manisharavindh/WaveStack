@@ -1,10 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap'); */
 
 :root {
   --color-dark: #d0f0f9;
   --color-light: #217ca6;
   --red: #F95657;
   --red-error: rgba(255, 68, 68, 0.1);
+}
+
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('/assets/fonts/PixelifySans-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('/assets/fonts/PixelifySans-VariableFont_wght.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
@@ -15,7 +31,7 @@
 
 body {
     overflow: hidden;
-    font-family: "Pixelify Sans", sans-serif;
+    font-family: 'Pixelify Sans', sans-serif;
     transition: background-color 0.3s ease;
     cursor: crosshair;
 }
@@ -37,6 +53,7 @@ body {
     display: none;
     place-items: center;
     font-size: larger;
+    cursor: crosshair;
 }
 
 .light-mode {
