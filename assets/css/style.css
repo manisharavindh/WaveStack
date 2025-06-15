@@ -94,16 +94,16 @@ body {
     /* background: url('/assets/img/sun.png'); */
     /* background-position: center; */
     /* background-size: cover; */
-    background-color: var(--color-light);
-    box-shadow: 0 0 0 2px var(--color-dark);
+    background-color: var(--color-dark);
+    box-shadow: 0 0 0 2px var(--color-light);
 }
 
 .light-mode .toggle-btn {
     /* background: url('/assets/img/moon.png'); */
     /* background-position: center; */
     /* background-size: cover; */
-    background-color: var(--color-dark);
-    box-shadow: 0 0 0 2px var(--color-light);
+    background-color: var(--color-light);
+    box-shadow: 0 0 0 2px var(--color-dark);
 }
 
 .toggle-btn:hover {
