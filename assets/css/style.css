@@ -42,17 +42,22 @@ body {
 .light-mode {
     color: var(--color-light);
     background: #87CEEB;
-    text-shadow: 2px 2px var(--color-dark);
 }
 
 .dark-mode {
     color: var(--color-dark);
     background: #0F0F23;
-    text-shadow: 2px 2px var(--color-light);
-
+    
 }
 
-.toggle-btn{
+.light-mode .wrapper {
+    text-shadow: 2px 2px var(--color-dark);
+}
+.dark-mode .wrapper {
+    text-shadow: 2px 2px var(--color-light);
+}
+
+.toggle-btn {
     position: absolute;
     top: 0.5rem;
     right: 0.55rem;
@@ -78,11 +83,6 @@ body {
     background-position: center;
     background-size: cover;
     opacity: 0.85;
-}
-
-.toggle-btn img{
-    height: 28px;
-    width: 28px;
 }
 
 .toggle-btn:hover {
@@ -138,5 +138,25 @@ body {
     }
     100% {
         background-position: 100% 0;
+    }
+}
+
+
+/* mobile */
+
+@media screen and (max-width: 600px) {
+    .wrapper{
+        font-size: small;
+    }
+
+    .loading-screen p{
+        font-size: 2rem;
+    }
+
+    .toggle-btn{
+        top: 0.4rem;
+        right: 0.45rem;
+        height: 22px;
+        width: 22px;
     }
 }
