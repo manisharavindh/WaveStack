@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
+:root {
+  --color-dark: #d0f0f9;
+  --color-light: #217ca6;
+  --red: #F95657;
+  --red-error: rgba(255, 68, 68, 0.1);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,20 +15,9 @@
 
 body {
     overflow: hidden;
-    /* font-family: 'Courier New', monospace; */
     font-family: "Pixelify Sans", sans-serif;
-    font-optical-sizing: auto;
-    /* font-weight: <weight>; */
-    font-style: normal;
     transition: background-color 0.3s ease;
     cursor: crosshair;
-    /* cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABYSURBVAiZY/z//z8DKYAJm2JkNjYwauLfxL+Jf5P+Jv5N+psENvFv4t/Ev4l/E/8m/k38m/g38W/i38S/iX8T/yb+TfybBDbxb+LfxL+JfxP/Jv5N/Jv4NwlsAgDzHhAaLp6OvwAAAABJRU5ErkJggg==') 3 3, crosshair; */
-}
-
-#container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
 }
 
 #canvas {
@@ -32,93 +28,115 @@ body {
     image-rendering: crisp-edges;
 }
 
-#controls {
+.wrapper {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 100;
-    display: flex;
-    gap: 10px;
-}
-
-.btn {
-    padding: 12px 16px;
-    border: 3px solid;
-    background: rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    font-weight: bold;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(5px);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    place-items: center;
+    font-size: larger;
 }
 
 .light-mode {
+    color: var(--color-light);
     background: #87CEEB;
+    text-shadow: 2px 2px var(--color-dark);
 }
 
 .dark-mode {
+    color: var(--color-dark);
     background: #0F0F23;
+    text-shadow: 2px 2px var(--color-light);
+
 }
 
-.light-mode .btn {
-    color: #2c3e50;
-    border-color: #2c3e50;
-    box-shadow: 3px 3px 0px #2c3e50;
-}
-
-.dark-mode .btn {
-    color: #00FF41;
-    border-color: #00FF41;
-    box-shadow: 3px 3px 0px #00FF41;
-}
-
-.btn:hover {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px !important;
-}
-
-.btn:active {
-    transform: translate(3px, 3px);
-    box-shadow: none !important;
-}
-
-#info {
+.toggle-btn{
     position: absolute;
-    bottom: 20px;
-    left: 20px;
-    z-index: 100;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+    top: 0.5rem;
+    right: 0.55rem;
+    aspect-ratio: 1;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 30px;
+    width: 30px;
+    aspect-ratio: 1;
 }
 
-.light-mode #info {
-    color: #2c3e50;
+.dark-mode .toggle-btn {
+    background: url('/assets/img/sun.png');
+    background-position: center;
+    background-size: cover;
+    opacity: 0.75;
 }
 
-.dark-mode #info {
-    color: #00FF41;
+.light-mode .toggle-btn {
+    background: url('/assets/img/moon.png');
+    background-position: center;
+    background-size: cover;
+    opacity: 0.85;
 }
 
-#fps {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 100;
-    font-size: 12px;
-    font-weight: bold;
-    opacity: 0.7;
+.toggle-btn img{
+    height: 28px;
+    width: 28px;
 }
 
-.light-mode #fps {
-    color: #2c3e50;
+.toggle-btn:hover {
+    transform: scale(1.1);
 }
 
-.dark-mode #fps {
-    color: #00FF41;
+.toggle-btn:active {
+    transform: scale(0.9);
+}
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  z-index: 100;
+}
+
+.dark-mode .loading-screen {
+  background-color: #0a1b2a;
+}
+
+.light-mode .loading-screen {
+  background-color: #217ca6;
+}
+
+.loading-screen p {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--color-dark);
+  position: relative;
+  background: linear-gradient(-45deg, 
+      rgba(255, 255, 255, 0.2) 0%, 
+      rgba(255, 255, 255, 0.3) 25%, 
+      rgba(255, 255, 255, 0.7) 45%, 
+      rgba(255, 255, 255, 0.75) 50%, 
+      rgba(255, 255, 255, 0.75) 55%, 
+      rgba(255, 255, 255, 0.3) 75%, 
+      rgba(255, 255, 255, 0.2) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowFlow 2.25s ease-in-out infinite;
+}
+
+@keyframes glowFlow {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
 }

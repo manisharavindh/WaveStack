@@ -58,15 +58,35 @@ const palettes = {
    }
 };
 
+// Theme persistence functions
+function loadTheme() {
+    try {
+        const savedTheme = localStorage.getItem('pixelated-sea-theme');
+        if (savedTheme !== null) {
+            isDark = savedTheme === 'dark';
+        }
+    } catch (error) {
+        console.warn('localStorage not available, using default theme');
+        // Fallback to system preference if localStorage fails
+        isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    
+    // Apply theme to body
+    document.body.className = isDark ? 'dark-mode' : 'light-mode';
+}
 
-// FPS counter
-let frameCount = 0;
-let lastTime = performance.now();
-let fps = 60;
+function saveTheme() {
+    try {
+        localStorage.setItem('pixelated-sea-theme', isDark ? 'dark' : 'light');
+    } catch (error) {
+        console.warn('localStorage not available, theme will not persist');
+    }
+}
 
 init();
 
 function init() {
+   loadTheme(); // Load saved theme before initializing
    resizeCanvas();
    setupEventListeners();
    animate();
@@ -88,14 +108,21 @@ function setupEventListeners() {
    
    // Only add mouse events if not on mobile
    if (!isMobile) {
-       canvas.addEventListener('mousemove', (e) => {
+       // Use document instead of canvas to track mouse anywhere on page
+       document.addEventListener('mousemove', (e) => {
+           // Get canvas position relative to viewport
            const rect = canvas.getBoundingClientRect();
-           // Precise cursor alignment
-           mouseX = (e.clientX - rect.left) / PIXEL_SIZE - 0.6;
-           mouseY = (e.clientY - rect.top) / PIXEL_SIZE - 0.5;
+           // Calculate mouse position relative to canvas, accounting for scroll
+           const canvasX = e.clientX - rect.left;
+           const canvasY = e.clientY - rect.top;
+           
+           // Convert to pixel coordinates with precise alignment
+           mouseX = canvasX / PIXEL_SIZE - 0.6;
+           mouseY = canvasY / PIXEL_SIZE - 0.6;
        });
        
-       canvas.addEventListener('mouseleave', () => {
+       // Reset mouse position when cursor leaves the window entirely
+       document.addEventListener('mouseleave', () => {
            mouseX = -999;
            mouseY = -999;
        });
@@ -184,23 +211,10 @@ function drawPixelatedSea() {
    }
 }
 
-function updateFPS() {
-   frameCount++;
-   const currentTime = performance.now();
-   
-   if (currentTime - lastTime >= 1000) {
-       fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
-       frameCount = 0;
-       lastTime = currentTime;
-       document.getElementById('fps').textContent = `FPS: ${fps}`;
-   }
-}
-
 function animate() {
    time += WAVE_SPEED;
    
    drawPixelatedSea();
-   updateFPS();
    
    animationId = requestAnimationFrame(animate);
 }
@@ -208,6 +222,7 @@ function animate() {
 function toggleMode() {
    isDark = !isDark;
    document.body.className = isDark ? 'dark-mode' : 'light-mode';
+   saveTheme(); // Save the new theme preference
 }
 
 // Cleanup on page unload
@@ -216,3 +231,49 @@ window.addEventListener('beforeunload', () => {
        cancelAnimationFrame(animationId);
    }
 });
+
+function initLoadingScreen() {
+    const loadingScreen = document.querySelector('.loading-screen');
+    const wrapper = document.querySelector('.wrapper');
+    
+    let isContentLoaded = false;
+    let isMinTimeElapsed = false;
+    
+    function showMainContent() {
+        if (isContentLoaded && isMinTimeElapsed) {
+            if (wrapper) {
+                wrapper.style.display = 'grid';
+            }
+            
+            if (loadingScreen) {
+                loadingScreen.style.transition = 'opacity 0.5s ease-out';
+                loadingScreen.style.opacity = '0';
+                
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 250);
+            }
+        }
+    }
+    
+    setTimeout(() => {
+        isMinTimeElapsed = true;
+        showMainContent();
+    }, 1500);
+    
+    if (document.readyState === 'complete') {
+        isContentLoaded = true;
+        showMainContent();
+    } else {
+        window.addEventListener('load', () => {
+            isContentLoaded = true;
+            showMainContent();
+        });
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLoadingScreen);
+} else {
+    initLoadingScreen();
+}
