@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    /* font-family: 'Courier New', monospace; */
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    /* font-weight: <weight>; */
+    font-style: normal;
+    transition: background-color 0.3s ease;
+    cursor: crosshair;
+    /* cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABYSURBVAiZY/z//z8DKYAJm2JkNjYwauLfxL+Jf5P+Jv5N+psENvFv4t/Ev4l/E/8m/k38m/g38W/i38S/iX8T/yb+TfybBDbxb+LfxL+JfxP/Jv5N/Jv4NwlsAgDzHhAaLp6OvwAAAABJRU5ErkJggg==') 3 3, crosshair; */
+}
+
+#container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+#canvas {
+    display: block;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 12px 16px;
+    border: 3px solid;
+    background: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(5px);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.light-mode {
+    background: #87CEEB;
+}
+
+.dark-mode {
+    background: #0F0F23;
+}
+
+.light-mode .btn {
+    color: #2c3e50;
+    border-color: #2c3e50;
+    box-shadow: 3px 3px 0px #2c3e50;
+}
+
+.dark-mode .btn {
+    color: #00FF41;
+    border-color: #00FF41;
+    box-shadow: 3px 3px 0px #00FF41;
+}
+
+.btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px !important;
+}
+
+.btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: none !important;
+}
+
+#info {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+}
+
+.light-mode #info {
+    color: #2c3e50;
+}
+
+.dark-mode #info {
+    color: #00FF41;
+}
+
+#fps {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+.light-mode #fps {
+    color: #2c3e50;
+}
+
+.dark-mode #fps {
+    color: #00FF41;
+}
