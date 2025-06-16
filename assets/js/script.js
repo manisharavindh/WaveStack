@@ -246,12 +246,12 @@ function initLoadingScreen() {
             }
             
             if (loadingScreen) {
-                loadingScreen.style.transition = 'opacity 0.5s ease-out';
+                loadingScreen.style.transition = 'opacity 0.3s ease-out';
                 loadingScreen.style.opacity = '0';
                 
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
-                }, 250);
+                }, 500);
             }
         }
     }
@@ -259,7 +259,7 @@ function initLoadingScreen() {
     setTimeout(() => {
         isMinTimeElapsed = true;
         showMainContent();
-    }, 1500);
+    }, 1500); // 1500
     
     if (document.readyState === 'complete') {
         isContentLoaded = true;

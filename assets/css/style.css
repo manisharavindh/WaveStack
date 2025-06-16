@@ -27,6 +27,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -54,6 +61,7 @@ body {
     place-items: center;
     font-size: larger;
     cursor: crosshair;
+    overflow-y: scroll;
 }
 
 .light-mode {
@@ -70,49 +78,11 @@ body {
 .light-mode .wrapper {
     text-shadow: 2px 2px var(--color-dark);
 }
+
 .dark-mode .wrapper {
     text-shadow: 2px 2px var(--color-light);
 }
 
-.toggle-btn {
-    position: absolute;
-    bottom: -0.75rem;
-    left: -1.25rem;
-    aspect-ratio: 1;
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    height: 25px;
-    width: 50px;
-    transform: rotate(45deg);
-    /* aspect-ratio: 1; */
-    opacity: 0.75;
-}
-
-.dark-mode .toggle-btn {
-    /* background: url('/assets/img/sun.png'); */
-    /* background-position: center; */
-    /* background-size: cover; */
-    background-color: var(--color-dark);
-    box-shadow: 0 0 0 2px var(--color-light);
-}
-
-.light-mode .toggle-btn {
-    /* background: url('/assets/img/moon.png'); */
-    /* background-position: center; */
-    /* background-size: cover; */
-    background-color: var(--color-light);
-    box-shadow: 0 0 0 2px var(--color-dark);
-}
-
-.toggle-btn:hover {
-    transform: scale(1.1) rotate(45deg);
-}
-
-.toggle-btn:active {
-    transform: scale(0.9) rotate(45deg);
-}
 .loading-screen {
   position: fixed;
   top: 0;
@@ -162,8 +132,124 @@ body {
     }
 }
 
+/** pixel btn **/
 
-/* mobile */
+.toggle-btn {
+    position: fixed !important;
+    top: 0.3rem !important;
+    right: 1rem !important;
+    cursor: pointer;
+    transition: transform  0.25s ease;
+    aspect-ratio: 1;
+    transform: scale(0.95);
+}
+
+.toggle-btn i{
+    text-shadow: none;
+    width: 0.5rem;
+    aspect-ratio: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark-mode .toggle-btn .fa-sun {
+    display: flex;
+}
+
+.light-mode .toggle-btn .fa-moon {
+    display: flex;
+}
+
+.toggle-btn:hover {
+    transform: scale(1);
+}
+
+.toggle-btn:active {
+    transform: scale(0.85);
+}
+
+.pixel-btn {
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;
+  
+  -moz-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+  -webkit-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+  -o-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+  border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+
+  position: relative;
+  display: block;
+  padding: 10px 10px; 
+  z-index: 2;
+}
+
+.pixel-btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: -10px;
+  right: -10px;
+  background: black;
+  z-index: -1;
+}
+
+.pixel-btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: -6px;
+  right: -6px;
+  background: black;
+  z-index: -1;
+}
+
+.dark-mode .pixel-btn, .dark-mode .pixel-btn::after, .dark-mode .pixel-btn::before {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
+
+.light-mode .pixel-btn, .light-mode .pixel-btn::after, .light-mode .pixel-btn::before {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+}
+
+/** sections **/
+
+.section{
+    min-height: 100vh;
+    width: 100%;
+
+    display: grid;
+    place-items: center;
+}
+
+.section.home{
+    display: grid;
+    place-items: center;
+}
+
+.section.home h1 {
+    font-size: 5rem;
+    text-decoration: underline;
+}
+
+.section h1{
+    text-decoration: underline;
+}
+
+
+
+
+/** mobile **/
 
 @media screen and (max-width: 600px) {
     .wrapper{
@@ -172,5 +258,14 @@ body {
 
     .loading-screen p{
         font-size: 2rem;
+    }
+
+    .pixel-btn {
+        padding: 10px 5px;
+        transform: scale(0.8);
+    }
+
+    .section.home h1{
+        font-size: 2.25rem;
     }
 }
