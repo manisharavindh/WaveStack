@@ -1,5 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap'); */
-
 :root {
   --color-dark: #d0f0f9;
   --color-light: #217ca6;
@@ -39,9 +37,8 @@
 
 body {
     overflow: hidden;
-    font-family: 'Pixelify Sans', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     transition: background-color 0.3s ease;
-    cursor: crosshair;
 }
 
 #canvas {
@@ -61,7 +58,7 @@ body {
     display: none;
     place-items: center;
     font-size: larger;
-    cursor: crosshair;
+    /* cursor: crosshair; */
     overflow-y: scroll;
     scroll-behavior: smooth;
 }
@@ -79,10 +76,12 @@ body {
 
 .light-mode .wrapper {
     text-shadow: 2px 2px var(--color-dark);
+    background-color: rgba(131, 202, 224, 0.5);
 }
 
 .dark-mode .wrapper {
     text-shadow: 2px 2px var(--color-light);
+    background-color: rgba(10, 27, 42, 0.25);
 }
 
 .loading-screen {
@@ -237,11 +236,11 @@ body {
 }
 
 .dark-mode .section:nth-child(odd){
-    background-color: rgba(10, 27, 42, 0.5);
+    background-color: rgba(10, 27, 42, 0.9);
 }
 
 .light-mode .section:nth-child(odd){
-    background-color: rgba(208, 240, 249, 0.5);
+    background-color: rgba(131, 202, 224, 0.9);
 }
 
 .section.home{
@@ -295,7 +294,7 @@ body {
 }
 
 .section.home .socials i{
-    transform: scale(1.6);
+    transform: scale(1.5);
 }
 
 .section h1{
