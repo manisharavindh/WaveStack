@@ -14,23 +14,40 @@
 <body class="dark-mode">
     <canvas id="canvas"></canvas>
     <div class="wrapper">
-        <div class="toggle-btn pixel-btn" onclick="toggleMode()">
+        <div class="toggle-btn pixel-btn single-pixel-btn" onclick="toggleMode()">
             <i class="fa-solid fa-sun"></i>
             <i class="fa-solid fa-moon"></i>
         </div>
         <div class="section home">
             <h1>Manish Aravindh</h1>
+            <h2>AI & DATA SCIENCE STUDENT WITH A PASSION FOR EXPLORING</h2>
+            <h3>Specializing in Data Science, Machine Learning, Artificial Intelligence, full-stack development, and a little bit of game development while exploring cutting-edge technologies - eager to collaborate on impactful projects and connect with industry professionals.</h3>
+            <div class="buttons">
+                <a href="#about">
+                    <div class="pixel-btn">Explore My Work</div>
+                </a>
+                <a href="#connect">
+                    <div class="pixel-btn">Get In Touch</div>
+                </a>
+            </div>
+            <div class="socials">
+                <div class="pixel-btn single-pixel-btn" onclick="window.open('https://www.linkedin.com/in/manisharavindh2007/', '_blank');"><i class="fa-brands fa-linkedin"></i></div>
+                <div class="pixel-btn single-pixel-btn" onclick="window.open('https://github.com/manisharavindh/', '_blank');"><i class="fa-brands fa-square-github"></i></div>
+                <div class="pixel-btn single-pixel-btn" onclick="window.open('https://www.instagram.com/nowar3289/', '_blank');"><i class="fa-brands fa-square-instagram"></i></div>
+                <div class="pixel-btn single-pixel-btn" onclick="window.open('mailto:manisharavindh2007@gmail.com')"><i class="fa-solid fa-square-envelope"></i></div>
+            </div>
         </div>
-        <div class="section about">
-            <h1>About</h1>
+        <div class="section about" id="about">
+            <h1>About Me</h1>
         </div>
         <div class="section projects">
             <h1>Projects</h1>
         </div>
-        <div class="section connect">
+        <div class="section connect" id="connect">
             <h1>Connect</h1>
         </div>
     </div>
+    
     <div class="loading-screen">
         <p>Wait a second...</p>
     </div>

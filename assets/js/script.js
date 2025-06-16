@@ -1,4 +1,3 @@
-// 003
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -7,6 +6,7 @@ let time = 0;
 let mouseX = 0;
 let mouseY = 0;
 let animationId;
+let LST = 1500; //150
 
 // Detect if device is mobile
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
@@ -259,7 +259,7 @@ function initLoadingScreen() {
     setTimeout(() => {
         isMinTimeElapsed = true;
         showMainContent();
-    }, 1500); // 1500
+    }, LST);
     
     if (document.readyState === 'complete') {
         isContentLoaded = true;

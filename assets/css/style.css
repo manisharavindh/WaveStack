@@ -32,6 +32,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
 *::-webkit-scrollbar {
   display: none;
 }
@@ -62,6 +63,7 @@ body {
     font-size: larger;
     cursor: crosshair;
     overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 .light-mode {
@@ -138,7 +140,6 @@ body {
     position: fixed !important;
     top: 0.3rem !important;
     right: 1rem !important;
-    cursor: pointer;
     transition: transform  0.25s ease;
     aspect-ratio: 1;
     transform: scale(0.95);
@@ -161,14 +162,6 @@ body {
     display: flex;
 }
 
-.toggle-btn:hover {
-    transform: scale(1);
-}
-
-.toggle-btn:active {
-    transform: scale(0.85);
-}
-
 .pixel-btn {
   image-rendering: optimizeSpeed;
   image-rendering: -moz-crisp-edges;
@@ -186,6 +179,9 @@ body {
   display: block;
   padding: 10px 10px; 
   z-index: 2;
+  text-shadow: none;
+  cursor: pointer;
+  transition: transform  0.25s ease;
 }
 
 .pixel-btn::before {
@@ -222,6 +218,14 @@ body {
     color: var(--color-dark);
 }
 
+.pixel-btn:hover {
+    transform: scale(1.05);
+}
+
+.pixel-btn:active {
+    transform: scale(0.85);
+}
+
 /** sections **/
 
 .section{
@@ -232,21 +236,83 @@ body {
     place-items: center;
 }
 
+.dark-mode .section:nth-child(odd){
+    background-color: rgba(10, 27, 42, 0.5);
+}
+
+.light-mode .section:nth-child(odd){
+    background-color: rgba(208, 240, 249, 0.5);
+}
+
 .section.home{
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
 }
 
 .section.home h1 {
-    font-size: 5rem;
+    font-size: 7rem;
     text-decoration: underline;
+}
+
+.section.home h1{
+    margin-top: 0.5rem;
+}
+
+.section.home h3{
+    min-width: 75%;
+    max-width: 85%;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.section.home .buttons{
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    margin-top: 1rem;
+}
+
+.section.home .socials{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.section.home .socials .pixel-btn{
+    transform: scale(0.6);
+}
+
+.section.home .socials .pixel-btn:hover{
+    transform: scale(0.7);
+}
+
+.section.home .socials .pixel-btn:active{
+    transform: scale(0.6);
+}
+
+.section.home .socials i{
+    transform: scale(1.6);
 }
 
 .section h1{
     text-decoration: underline;
 }
 
+.section.about{
+    display: flex;
+}
+.section.about h1{
+    width: 100%;
+    text-align: center;
+}
 
+a{
+    text-decoration: none;
+}
 
 
 /** mobile **/
@@ -266,6 +332,36 @@ body {
     }
 
     .section.home h1{
-        font-size: 2.25rem;
+        font-size: 3rem;
+        line-height: 0.9;
+        max-width: 90%;
+    }
+
+    .section.home h2{
+        font-size: 1rem;
+        max-width: 80%;
+        margin-top: 1rem;
+    }
+
+    .section.home h3{
+        font-size: 0.85rem;
+        font-weight: 500;
+        max-width: 87.5%;
+        margin-top: 0.25rem;
+    }
+
+    .section.home .buttons{
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 0.75rem; 
+    }
+
+    .section.home .buttons .pixel-btn{
+        transform: scale(1.1);
+    }
+
+    .section.home .socials{
+        gap: 1rem;
+        margin-top: 1.5rem;
     }
 }
